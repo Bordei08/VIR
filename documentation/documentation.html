@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title> VideoTube </title>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+    <article typeof="schema:ScholarlyArticle">
+        <header>
+            <a href="../html/home.html">Go back to VideoTube </a>
+        </header>
+        <h2>Table of contents</h2>
+        <ul>
+            <li>
+                <a href="#authors">Authors</a>
+            </li>
+            <li>
+                <a href="#introduction">1. Introduction</a>
+                <ul>
+                    <li><a href="#introduction-purpose">1.1 Purpose</a></li>
+                    <li><a href=" #conventions">1.2 Document Conventions</a></li>
+                    <li><a href="#audience">1.3 Intended Audience and Reading Suggestions</a></li>
+                    <li><a href="#product-scope">1.4 Product Scope</a></li>
+                    <li><a href="#product-references">1.5 References</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#overall">2. Overall Description</a>
+                <ul>
+                    <li><a href="#product-perspective">2.1 Product Perspective</a></li>
+                    <li><a href="#product-functions">2.2 Product Functions</a></li>
+                    <li><a href="#users">2.3 User Classes and Characteristics</a></li>
+                    <li><a href="#operating-environment">2.4 Operating Environment</a></li>
+                    <li><a href="#constraints">2.5 Design and Implementation Constraints</a></li>
+                    <li><a href="#documentantion">2.6 User Documentation</a></li>
+                    <li><a href="#dependencies">2.7 Assumptions and Dependencies</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#external">3. External Interface Requirements</a>
+                <ul>
+                    <li>
+                        <a href="#user-interface">3.1 User Interfaces</a>
+                        <ul>
+                            <li><a href="#user-interface-1">3.1.1 Home Interface</a></li>
+                            <li><a href="#user-interface-2">3.1.2 Login Interface</a></li>
+                            <li><a href="#user-interface-3">3.1.3 Register Interface</a></li>
+                            <li><a href="#user-interface-4">3.1.4 About&Help Interface</a></li>
+                            <li><a href="#user-interface-5">3.1.5 Video Interface</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#hardware-interface">3.2 Hardware Interfaces</a></li>
+                    <li><a href="#software-interface">3.3 Software Interfaces</a></li>
+                    <li><a href="#communications-interface">3.4 Communications Interfaces</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#system-features">4. System Features</a>
+                <ul>
+                    <li><a href="#system-features-1">System Feature 1: Solving Math Problems</a></li>
+                    <li><a href="#system-features-2">System Feature 2: Participation in the Top</a></li>
+                    <li><a href="#system-features-3">System Feature 3: Giving Hints</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#non-functional">5. Other Nonfunctional Requirements</a>
+                <ul>
+                    <li><a href="#performance">5.1 Performance Requirements</a></li>
+                    <li><a href="#safety">5.2 Safety Requirements</a></li>
+                    <li><a href="#security">5.3 Security Requirements</a></li>
+                    <li><a href="#software">5.4 Software Quality Attributes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#other-requirements">Other Requirements</a>
+                <ul>
+                    <li><a href="#formalization">1. Formalization of input data</a></li>
+                </ul>
+            </li>
+        </ul>
+        <section id="authors" typeof="sa:AuthorsList">
+            <div role="contentinfo">
+                <h2>Authors</h2>
+                <ul>
+                    <li typeof="sa:ContribuitorRole" property="schema:author">
+                        <span typeof="sa:Person">
+                            <meta property="schema:givenName" content="Petronel" />
+                            <meta property="schema:familyName" content="Bahnaru" />
+                            <span property="schema:name"> Bahnaru Petronel</span>
+                        </span>
+                        <ul>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="mailTo:bahnaru.petronel@gmail.com"
+                                    property="schema:email">bahnaru.petronel@gmail.com</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li typeof="sa:ContribuitorRole" property="schema:author">
+                        <span typeof="sa:Person">
+                            <meta property="schema:givenName" content="Mihai-Gabi" />
+                            <meta property="schema:familyName" content="Bordei" />
+                            <span property="schema:name"> Bordei Mihai-Gabi </span>
+                        </span>
+                        <ul>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="mailTo:bordeimihai2001@gmail.com"
+                                    property="schema:email">bordeimihai2001@gmail.com</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section typeof="sa:Abstract">
+            <div role="document">
+                <h2 id="introduction">1. Introduction</h2>
+                <h3 id="introduction-purpose">1.1 Purpose</h3>
+                <p>
+                    The current version number for this product is 1.0 (first version). The product is intended for
+                    helping users to view new videoclips or to add ratings to the videoclips they have seen and have a
+                    good opinion about.
+                </p>
+
+                <h3 id="conventions">1.2 Document Conventions</h3>
+                <ul>
+                    <li>
+                        The document is based on the template <cite typeof="citation">
+                            <a href="https://github.com/rick4470/IEEE-SRS-Tempate">
+                                IEEE System Requirements
+                                Specification Template
+                            </a>
+                        </cite>.
+                    </li>
+                    <li>Sequences of references are specified in italics.</li>
+                </ul>
+
+                <h3 id="audience">1.3 Intended Audience and Reading Suggestions</h3>
+                <p>
+                    The document is intended for users, developers and testers. We suggest reading the document for
+                    users in the current format, starting with the introduction. For developers and testers, we suggest
+                    reading the document with the "Overall Description".
+                </p>
+
+                <h3 id="product-scope">1.4 Product Scope</h3>
+                <p>
+                    The aim for the user is to accumulate knowledge about different fields of mathematics (algebra,
+                    geometry, trigonometry, analysis), by age categories (primary, middle school, high school). The
+                    problems presented in the application are divided into modules - light, medium and a difficult
+                    problem, which requires addiotional research on the solution technique. The user has the possibility
+                    to buy hints in the application, in order to test their basic knowledge.
+                </p>
+
+                <h3 id="product-references" typeof="sa:ReferenceList">1.5 References</h3>
+                <ul>
+                    <li class="ref-something" typeof="schema:ScholarlyArticle"
+                        resource="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html">
+                        <span property="schema:author" typeof="schema:Person">
+                            <span property="schema:familyName">Buraga</span>
+                            <span property="schema:givenName">Sabin</span>.
+                            <span property="schema:additionalName">Corneliu</span>
+                        </span>
+                        <cite property="schema:name">Site Tehnologii Web.</cite>
+                        <span property="schema:isPartOf" typeof="schema:PublicationVolume">
+                            <span property="schema:isPartOf" typeof="schema:Periodical">
+                                <span property="schema:name">FII UAIC.</span>
+                            </span>
+                        </span>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li class="ref-something" typeof="schema:ScholarlyArticle"
+                        resource="https://victorvlad19.github.io/web/">
+                        <span property="schema:author" typeof="schema:Person">
+                            <span property="schema:familyName">Victor</span>
+                            <span property="schema:givenName">Vlad</span>.
+                        </span>
+                        <span property="schema:isPartOf" typeof="schema:Periodical">
+                            <span property="schema:name">https://victorvlad19.github.io/web/</span>
+                        </span>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li class="ref-something" typeof="schema:ScholarlyArticle"
+                        resource="https://github.com/rick4470/IEEE-SRS-Tempate">
+                        <span property="schema:author" typeof="schema:Person">
+                            <span property="schema:familyName">H</span>
+                            <span property="schema:givenName">Rick</span>.
+                        </span>
+                        <cite property="schema:name">IEEE-Template.</cite>
+                        <span property="schema:isPartOf" typeof="schema:Periodical">
+                            <span property="schema:name">GitHub</span>
+                        </span>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li class="ref-something" typeof="schema:ScholarlyArticle"
+                        resource="https://w3c.github.io/scholarly-html/">
+                        <cite property="schema:name">Scholarly HTML</cite>
+                        <span property="schema:isPartOf" typeof="schema:Periodical">
+                            <span property="schema:name">w3c.gihtub.io</span>
+                        </span>
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+        <section typeof="sa:MaterialsAndMethods">
+            <div role="document">
+                <h2 id="overall">2. Overall Description</h2>
+                <h3 id="product-functions">2.1 Product Functions</h3>
+                <ul>
+                    <li>Registration in the application</li>
+                    <li>Application log in</li>
+                    <li>Adding new ratings on your favortie movies</li>
+                    <li>Adding new comments on your favorite movies</li>
+                    <li>Adding new videos in your liked list</li>
+                </ul>
+
+                <h3 id="users">2.2 Users and Characteristics</h3>
+                <p>
+                    We believe that the class of users who will use this application will be composed of any person
+                    alive since everybody might need a recommendation before trying something new.
+                </p>
+
+                <h3 id="operating-environment">2.3 Operating Environment</h3>
+                <p>
+                    For optimal use of the application, version 1.0, we recommend using one of the latest version of
+                    your browser. Also, there is no need for top hardware specifications - due to the simplicity of the
+                    application, we believe that it can run on the vast majority of computers.
+                </p>
+
+                <h3 id="constraints">2.4 Design and Implementation Constraints</h3>
+                <p>
+                    For the interface of the web application, we used only HTML5, CSS3 and JavaScript. Instead, to
+                    create the backend we will mainly use PHP.
+                </p>
+
+                <h3 id="documentantion">2.5 User Documentation</h3>
+                <p>
+                    In order for the web application to work in optimal parameters, it is necessary to use the one of
+                    the latest versions of mainly any browser.
+                </p>
+
+                <h3 id="dependencies">2.6 Assumptions and Dependencies</h3>
+                <p>
+                    The part of the database in which users's information is stored may affect the utility of the
+                    application (for example, if the database service requires a fee, depending on the complexity,
+                    changes will be made to the application).
+                </p>
+            </div>
+        </section>
+
+        <section typeof="sa:MaterialsAndMethods">
+            <div role="document">
+                <h2 id="external">3. External Interface Requirements</h2>
+                <h3 id="user-interface">3.1 User Interface</h3>
+                <p>
+                    The components for which a graphical user interface was required are:
+                </p>
+                <ul>
+                    <li>Home window</li>
+                    <li>Login window</li>
+                    <li>Register window</li>
+                    <li>Help & about window</li>
+                    <li>Video window
+                    <li>
+                </ul>
+                <h4>3.1.1 Home Interface</h4>
+                <p>
+                    The image below is the main window, in which the user will have 3 categories to choose from. The
+                    user has at his disposal a navigation bar, through which he can access the about&help page, he can
+                    access the login/register page or he can see his profile if he is logged in. By using the "login"
+                    button, the user will be sent to the page intended for authentication, and by using the "register"
+                    button, the user will be sent to the page intended for registration in the application.
+                </p>
+                <figure typeof="sa:image" id="user-interface-1">
+                    <img src="./images/home.png" style="width:700px;height:400px;" alt="home-screenshot"
+                        class="screenshots-home" />
+                    <figcaption>Home Interface</figcaption>
+                </figure>
+
+                <h4>3.1.2 Login Interface</h4>
+                <p>
+                    The image below represents the login window, in which the user can log in the application. The user
+                    must enter their username or email and password to successfully complete the process.
+                </p>
+                <figure typeof="sa:image" id="user-interface-2">
+                    <img src="./images/login.png" style="width:700px;height:400px;" alt="login-screenshot"
+                        class="screenshots-login" />
+                    <figcaption>Login Interface</figcaption>
+                </figure>
+
+                <h4>3.1.3 Register Interface</h4>
+                <p>
+                    The image below represents the register window, in which the user can create a new account in the
+                    application. The user must enter their username, email and the password twice to successfully
+                    complete the process.
+                </p>
+                <figure typeof="sa:image" id="user-interface-3">
+                    <img src="./images/register.png" style="width:700px;height:400px;" alt="register-screenshot"
+                        class="screenshots-register" />
+                    <figcaption>Register Interface</figcaption>
+                </figure>
+
+                <h4>3.1.4 Help & About Interface</h4>
+                <p>
+                    The images below represents the help & about page, where the user can read about our scope, can
+                    leave a feedback, an observation or a possible improvement for the application, in the form of a
+                    message. The message will reach the application administrators, who will evaluate the received form.
+                    The user is obliged to correctly and completely fill in all the fields for this service. To
+                    successfully complete the service, the user will press the "submit" button.
+                </p>
+                <figure typeof="sa:image" id="user-interface-4">
+                    <img src="./images/about&help1.png" style="width:700px;height:400px;" alt="help&about1-screenshot"
+                        class="screenshots-help&about1" />
+                </figure>
+                <figure typeof="sa:image">
+                    <img src="./images/about&help2.png" style="width:700px;height:400px;" alt="help&about2-screenshot"
+                        class="screenshots-help&about2" />
+                    <figcaption>Contact Interface</figcaption>
+                </figure>
+
+                <h4>3.1.5 Video Interface</h4>
+                <p>
+                    The images below represents the interface of the Video page from where the user can see the
+                    thumbnail of a video, the description, the ratings and the comments.They can also add a new rating
+                    and share their opinion in the comments.
+                </p>
+                <figure typeof="sa:image">
+                    <img src="./images/video.png" style="width:700px;height:400px;" alt="video_page1-screenshot"
+                        class="screenshots-video_page1" />
+                </figure>
+
+                <h4>3.1.6 Top videos Interface</h4>
+                <p>
+                    The images below represents the interface with the top of the videos sorteb by views.
+                </p>
+                <figure typeof="sa:image">
+                    <img src="./images/top.png" style="width:700px;height:400px;" alt="video_page1-screenshot"
+                        class="screenshots-video_page1" />
+                </figure>
+
+                <h4>3.1.7 Liked videos Interface</h4>
+                <p>
+                    The images below represents the interface of the favorites videos of a random user.
+                </p>
+                <figure typeof="sa:image">
+                    <img src="./images/liked.png" style="width:700px;height:400px;" alt="video_page1-screenshot"
+                        class="screenshots-video_page1" />
+                </figure>
+
+                <h3 id="hardware-interface">3.2 Hardware Interfaces</h3>
+                Devices that can interact with the application include both computers (PCs, laptops, other similar
+                types) and tablets and mobile devices. Because the application has a responsive interface, it can scale
+                information to different screen sizes.
+                <figure typeof="sa:image">
+                    <img src="./images/mobile_login1.png" style="width:350px;height:600px;" alt="login1-screenshot"
+                        class="screenshots-nav" />
+                </figure>
+
+                <figure typeof="sa:image" id="user-interface-mobile1">
+                    <img src="./images/mobile_login2.png" style="width:350px;height:600px;" alt="login2-screenshot"
+                        class="screenshots-nav" />
+                    <figcaption>Login Interface (for mobile)</figcaption>
+                </figure>
+
+                <figure typeof="sa:image">
+                    <img src="./images/video_mobile.png" style="width:350px;height:600px;" alt="video1-screenshot"
+                        class="screenshots-video1" />
+                    <figcaption>Video Interface (for mobile)</figcaption>
+                </figure>
+
+
+                <h3 id="software-interface">3.3 Software Interfaces</h3>
+                <p>
+                    A first software component that establishes a connection with the application is the database. To
+                    access the database, we will use the PHP language, and to modify the data inside the database, we
+                    will use MySQL. Also, scripts written in JavaScript language are used to improve the user experience
+                    in the application.
+                </p>
+
+                <h3 id="communications-interface">3.4 Communications Interfaces</h3>
+                <p>
+                    The application imposes the condition that the user has an internet connection, in order to be able
+                    to verify the answers given by him. Also, the internet connection is necessary regarding the contact
+                    with the application developers, in the contact window. Another protocol that is used within the
+                    application (on the server side) is the HTTP protocol.
+                </p>
+
+
+            </div>
+        </section>
+
+        <section typeof="sa:MaterialsAndMethods">
+            <div role="document">
+                <h2 id="system-features">4. System Features</h2>
+                <h3 id="system-features-1">4.1 System Feature 1: Save the liked videos</h3>
+                <p>
+                    This feature has a high priority because it is the main feature of the application. In addition to
+                    the other features, the main purpose of the application is to save your favorites videos and see
+                    other opinions.
+                </p>
+
+                <h3 id="system-features-2">4.2 System Feature 2: See comments and ratings on a video</h3>
+                <p>
+                    This feature has a medium priority because it might help the user decide if he wants maybe to see a
+                    video based on the reviews and comments.This is a good way to decide if you want to try something
+                    new or not and to add it to your list.
+                </p>
+
+                <h3 id="system-features-3">4.3 System Feature 3: Add new comments and ratings on a video</h3>
+                <p>
+                    This feature has a medium priority because it only adds your opinion about the video in the comment
+                    section. This might be however important to other users.
+                </p>
+            </div>
+        </section>
+
+        <section typeof="sa:MaterialsAndMethods">
+            <div role="document">
+                <h2 id="non-functional">5. Other Nonfunctional Requirements</h2>
+                <h3 id="performance">5.1 Performance Requirements</h3>
+                <p>
+                    Currently (version 1.0 of the application), the developers consider that there are no performance
+                    requirements, as long as the application runs in one of the latest versions of the browsers the user
+                    is using.
+                </p>
+
+                <h3 id="safety">5.2 Safety Requirements</h3>
+                <p>
+                    The results of testing the application in the current version (1.0) showed that there are no losses,
+                    damages or losses that may occur from the use of the application. However, if a violation of one of
+                    the above is observed, it is recommended to isolate and analyze the incident.
+                </p>
+
+                <h3 id="security">5.3 Security Requirements</h3>
+                <p>
+                    The database used is MySQL, and each user's data is stored in the database. Each user's password is
+                    not stored properly, but is applied to a hash. The final result is stored in the database. Through
+                    certain functions that cannot be revealed publicly, each user logs in to his password.
+                </p>
+
+                <h3 id="software">5.4 Software Quality Attributes</h3>
+                <p>
+                    The application has as secondary purpose reliability, but also portability on different devices
+                    (computer, tablet, phone). This work is done with the help of the responsive interface.
+                </p>
+            </div>
+        </section>
+
+        <section typeof="sa:ReferenceList">
+            <div role="document">
+                <h2 id="other-requirements">Other Requirements</h2>
+                <h3 id="formalization">1. Formalization of input data</h3>
+                <p>
+                    In order for users' data to be stored correctly in the database, they must have the following
+                    formalities:
+                </p>
+                <ul>
+                    <li>Email termination must have the suffix "@yahoo.com" or "@gmail.com"</li>
+                    <li>To search a video you will have to use in the search bar a name as close as possible to the
+                        complete name of the video.</li>
+                </ul>
+            </div>
+        </section>
+    </article>
+</body>
+
+</html>
