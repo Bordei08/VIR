@@ -1,0 +1,21 @@
+const category = require('../models/categoryModel')
+const { getPostData } = require('../utils.js')
+
+async function getCategoryAll(req, res) {
+    var categoryResult = await category.getCategory();
+    try {
+        if (categoryResult == '[]') {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: ' Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(categoryResult)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {
+    getCategoryAll
+}

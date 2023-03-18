@@ -1,0 +1,98 @@
+const video = require('../models/videoModel')
+const { getPostData } = require('../utils.js')
+
+
+
+async function getVideoAllBy(req, res, id) {
+    var videoResult = await video.getVideoAll(id);
+    try {
+        if (videoResult == null) {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: ' Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(videoResult)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getVideoIdBy(req, res, name) {
+    var videoResult = await video.getVideoId(name);
+    var obj = new Object();
+    obj.id = videoResult;
+    var jsonString = JSON.stringify(obj);
+    try {
+        if (videoResult == null) {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: ' Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(jsonString)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getAllVideoByCategory(req, res, name) {
+    var videoResult = await video.getVideoByCategory(name);
+    try {
+        if (videoResult == null) {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: ' Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(videoResult)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getResultTop(req, res,) {
+    const videoResult = await video.getTop();
+    try {
+        if (videoResult == `[]`) {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: ' Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(videoResult)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getResultUpdateVideo(req, res) {
+    var body = await getPostData(req)
+
+    body = JSON.parse(body);
+    try {
+        var videoResult = await video.getVideoAll(body.id);
+
+        if (videoResult != null) {
+
+            videoResult = await video.updateVideo(body.id, body.rating);
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+        }
+        else {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        }
+        res.end(videoResult)
+
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {
+    getVideoAllBy,
+    getVideoIdBy,
+    getAllVideoByCategory,
+    getResultTop,
+    getResultUpdateVideo
+}

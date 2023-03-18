@@ -1,0 +1,64 @@
+const reviewVideo = require('../models/reviewModel')
+const { getPostData } = require('../utils.js')
+
+
+async function getResultCreateReview(req, res) {
+
+    var body = await getPostData(req)
+    body = JSON.parse(body);
+
+    try {
+        const reviewResult = await reviewVideo.createReview(body.id_user, body.id_video, body.meg);
+        if (reviewResult == 'true')
+            res.writeHead(201, { 'Content-Type': 'application/json' })
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(reviewResult))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+async function getResultReviewUser(req, res, idUser) {
+
+    try {
+        const reviewResult = await reviewVideo.getReviewUser(idUser);
+        if (reviewResult != '[]')
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(reviewResult)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getResultReviewVideo(req, res, idVideo) {
+
+    try {
+        const reviewResult = await reviewVideo.getReviewVideo(idVideo);
+
+        if (reviewResult != '[]')
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(reviewResult)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+
+
+module.exports = {
+    getResultCreateReview,
+    getResultReviewVideo,
+    getResultReviewUser
+}
+

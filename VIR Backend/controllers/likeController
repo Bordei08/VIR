@@ -1,0 +1,63 @@
+const likeVideo = require('../models/likeModel')
+const { getPostData } = require('../utils.js')
+
+
+async function getResultCreateLike(req, res) {
+
+    var body = await getPostData(req)
+
+    body = JSON.parse(body);
+
+
+    try {
+        const likeResult = await likeVideo.createLike(body.id_user, body.id_video);
+
+        if (likeResult == 'true')
+            res.writeHead(201, { 'Content-Type': 'application/json' })
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(likeResult))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+async function getResultRemoveLike(req, res, idUser, idVideo) {
+    try {
+        var likeResult = await likeVideo.getLike(idUser, idVideo);
+        if (likeResult == 'true') {
+            likeResult = await likeVideo.removeLike(idUser, idVideo);
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+        }
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(likeResult))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+async function getResultLikeUser(req, res, idUser) {
+
+    try {
+        const likeResult = await likeVideo.getLikeUser(idUser);
+        if (likeResult != '[]')
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(likeResult)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {
+    getResultCreateLike,
+    getResultRemoveLike,
+    getResultLikeUser
+}

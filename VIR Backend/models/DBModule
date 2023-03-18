@@ -1,0 +1,884 @@
+const oracledb = require('oracledb')
+const CLIENT_ID = "09cd3689e8271df1e6fb49865431b0eb439acafe"
+const CLIENT_SECRET = "/kebe/rbIr77u/v1ExH5FCRfOslvD/zNdjVe8m5YoTGqZ64nmX62clEZWX/QGoGnoT6HdrgA75BwjRpgHuSx4cyYNGj3xyk/RTxnVLmAt4MjS9f8axhZ2/oDcblZbUGN"
+const ACCESS_TOKEN = "5be2d01f5910432bf96c594e8f7f2057"
+let ACCES_VIDEO = "https://api.vimeo.com";
+
+
+
+async function verfLogin(username, password) {
+    let connection;
+    var resultDB;
+
+    try {
+
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+
+
+
+
+        let result;
+
+        result = await connection.execute(
+            `select username, password from users Where username = '${username}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+
+        row = await rs.getRow();
+        resultDB = 'false';
+
+        if (row) {
+            let passFromDB = row.PASSWORD;
+            resultDB = 'false';
+
+
+            var string = password;
+            var crypto = require('crypto');
+            var hash = crypto.createHash('md5').update(string).digest('hex');
+            if (passFromDB == hash)
+                resultDB = 'true';
+        }
+        await rs.close();
+
+    } catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
+    return resultDB;
+
+}
+
+
+async function registerUser(username, email, password) {
+    let connection
+    var resultInsert = JSON.stringify({ message: 'False' });
+
+
+    var string = password;
+    var crypto = require('crypto');
+    var hash = crypto.createHash('md5').update(string).digest('hex');
+
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+
+        var insertToTabel = `
+        DECLARE
+        v_id VARCHAR2(100);
+        v_temp int;
+        
+        BEGIN 
+        LOOP
+            v_id := FLOOR(DBMS_RANDOM.VALUE(1000,9999)) || CHR(FLOOR(DBMS_RANDOM.VALUE(65,91))) || CHR(FLOOR(DBMS_RANDOM.VALUE(65,91))) || CHR(FLOOR(DBMS_RANDOM.VALUE(65,91)))|| CHR(FLOOR(DBMS_RANDOM.VALUE(65,91)))|| FLOOR(DBMS_RANDOM.VALUE(100,999));
+            SELECT COUNT(*) INTO v_temp From users Where v_id = users.id;
+            EXIT WHEN v_temp = 0;
+            END LOOP;
+            
+            INSERT INTO users VALUES(v_id,'${username}', '${email}', '${hash}');
+        END;`
+
+        let result;
+        var count;
+        result = await connection.execute(
+            `select * from users Where users.username = '${username}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+
+        row = await rs.getRow();
+
+        if (row) {
+            resultInsert = 'false';
+        }
+        else {
+            await connection.execute(insertToTabel);
+            resultInsert = 'true';
+            await connection.commit();
+        }
+
+        await rs.close();
+
+    } catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+    return resultInsert;
+}
+
+
+async function getIdUser(username) {
+    let connection;
+    var resultDB;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        var count;
+        result = await connection.execute(
+            `select * from users Where users.username = '${username}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+
+        row = await rs.getRow();
+
+        resultDB = row.ID;
+        rs.close();
+
+        return resultDB;
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
+}
+
+
+async function getUsernameDB(id) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        var count;
+        result = await connection.execute(
+            `select * from users Where users.id = '${id}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+
+        row = await rs.getRow();
+
+
+        var resultDB = row.USERNAME;
+
+        rs.close();
+
+        return resultDB;
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
+}
+
+
+async function getUsernameAndEmailDB(id) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from users Where users.id = '${id}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+
+        row = await rs.getRow();
+
+
+
+        var obj = new Object();
+        obj.username = row.USERNAME;
+        obj.email = row.EMAIL;
+
+        rs.close();
+
+        return obj;
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+getCategoryDB();
+async function getCategoryDB() {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from category `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        row = await rs.getRow();
+        var resutJson = `[`;
+        var i = 0;
+        while (row) {
+            resutJson += `{"name" : "${row.CATEGORY}"}`;
+            if (i < 11) {
+                resutJson += `,`;
+                i++;
+            }
+            row = await rs.getRow();
+        }
+        resutJson += `]`;
+        return resutJson;
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
+}
+
+
+async function getVideoIdDB(name) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from video Where video.name = '${name}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        row = await rs.getRow();
+        var resultVideo = null;
+
+        if (row) {
+            resultVideo = row.ID;
+        }
+        return resultVideo;
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+
+async function getVideoAllDB(id) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from video Where video.id = ${id} `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        row = await rs.getRow();
+        var resultVideo = null;
+        if (row) {
+            resultVideo = `{`;
+            resultVideo += `"id" : "${row.ID}",`;
+            resultVideo += `"uri" : "${row.URI}",`;
+            resultVideo += `"name" : "${row.NAME}",`;
+            resultVideo += `"description" : "${row.DESCRIPTION}",`;
+            resultVideo += `"category" : "${row.CATEGORY}",`;
+            resultVideo += `"duration" : "${row.DURATION}",`;
+            resultVideo += `"created_time" : "${row.CREATED_TIME}",`;
+            resultVideo += `"posted_by" : "${row.POSTED_BY}",`;
+            resultVideo += `"stats" : "${row.STATS}",`;
+            var resultFix = row.EMBED;
+            resultVideo += `"embed" : "${resultFix.replaceAll('"', '#')} ",`;
+            resultVideo += `"is_playable" : "${row.IS_PLAYABLE}",`;
+            resultVideo += `"number_of_rating" : "${row.NUMBER_OF_RATINGS}",`;
+            resultVideo += `"rating" : "${row.RATING}",`;
+            resultFix = row.PICTURE;
+            resultVideo += `"picture" : "${resultFix.replaceAll('"', '#')}",`;
+            resultVideo += `}`;
+        }
+
+        return resultVideo;
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+
+async function getVideoByCategoryDB(category) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from video Where video.category = '${category}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        row = await rs.getRow();
+        var resutJson = `[`;
+
+        while (row) {
+            resutJson += `{"id" : "${row.ID}"}`;
+            resutJson += `,`;
+            row = await rs.getRow();
+        }
+        resutJson = resutJson.slice(0, -1);
+        resutJson += `]`;
+
+
+        return resutJson;
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
+}
+
+async function insertFeedBack(email, meg) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        var insertSql = `INSERT INTO feedback values('${email}', '${meg}')`
+        await connection.execute(insertSql);
+        await connection.commit();
+        return 'true';
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+async function insertLike(idUser, idVideo) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        var insertSql = `INSERT INTO like_video values('${idUser}', ${idVideo})`
+        await connection.execute(insertSql);
+        await connection.commit();
+        return 'true';
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+async function insertReview(idUser, idVideo, review) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        var insertSql = `INSERT INTO reviews values('${idUser}', ${idVideo}, '${review}')`
+        await connection.execute(insertSql);
+        await connection.commit();
+        return 'true';
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+async function deleteLike(idUser, idVideo) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        var insertSql = `DELETE FROM like_video Where like_video.id_user = '${idUser}' AND like_video.id_video = ${idVideo}`;
+        await connection.execute(insertSql);
+        await connection.commit();
+        return 'true';
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+
+async function existLike(idUser, idVideo) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from like_video Where like_video.id_user = '${idUser}' AND like_video.id_video = ${idVideo} `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        row = rs.getRow();
+        if (row)
+            return 'true';
+        return 'false';
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+async function getReviewVideoDB(idVideo) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from reviews Where reviews.id_video = ${idVideo} `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        var resultJson = `[`;
+        row = await rs.getRow();
+        var flag = 0;
+        while (row) {
+            flag = 1;
+            resultJson += `{"id_user" : "${row.ID_USER}","review" : "${row.REVIEW}"},`;
+            row = await rs.getRow();
+        }
+        if (flag == 1)
+            resultJson = resultJson.slice(0, -1);
+        resultJson += `]`;
+        return resultJson;
+
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+async function getReviewUserDB(idUser) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from reviews Where reviews.id_user = '${idUser}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        var resultJson = `[`;
+        row = await rs.getRow();
+        var flag = 0;
+
+        while (row) {
+            flag = 1;
+
+            resultJson += `{"id_video" : ${row.ID_VIDEO},"review" : "${row.REVIEW}"},`;
+            row = await rs.getRow();
+        }
+        if (flag == 1)
+            resultJson = resultJson.slice(0, -1);
+        resultJson += `]`;
+        return resultJson;
+
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+
+async function getLikeUserDB(idUser) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `select * from like_video Where like_video.id_user = '${idUser}' `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        var resultJson = `[`;
+        row = await rs.getRow();
+        var flag = 0;
+
+        while (row) {
+            flag = 1;
+
+            resultJson += `{"id_video" : ${row.ID_VIDEO},"review" : "${row.REVIEW}"},`;
+            row = await rs.getRow();
+        }
+        if (flag == 1)
+            resultJson = resultJson.slice(0, -1);
+        resultJson += `]`;
+        return resultJson;
+
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+
+async function getTopDB(idUser) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        let result;
+        result = await connection.execute(
+            `SELECT * FROM VIDEO WHERE ROWNUM < 11 ORDER BY STATS DESC    `,
+            [],
+            { resultSet: true, outFormat: oracledb.OUT_FORMAT_OBJECT });
+
+        const rs = result.resultSet;
+        var row;
+        var resultJson = `[`;
+        row = await rs.getRow();
+        var flag = 0;
+
+        while (row) {
+            flag = 1;
+
+            resultJson += `{"id_video" : ${row.ID}},`;
+            row = await rs.getRow();
+        }
+        if (flag == 1)
+            resultJson = resultJson.slice(0, -1);
+        resultJson += `]`;
+
+        return resultJson;
+
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+async function insertReview(idUser, idVideo, review) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        var insertSql = `INSERT INTO reviews values('${idUser}', ${idVideo}, '${review}')`
+        await connection.execute(insertSql);
+        await connection.commit();
+        return 'true';
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+async function updateVideoDB(idVideo, rating) {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        await connection.execute('UPDATE video SET rating = :1 where ID = :2', [rating, idVideo]);
+        await connection.commit();
+
+        return 'true';
+    }
+    catch (err) {
+        console.error(err);
+    } finally {
+        if (connection) {
+            try {
+                await connection.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+}
+
+// request for video
+
+/*
+Stocam request ul intr un fisier ca sa nu facem un nou request de fiecare data cand pornim server ul
+function requestVideo() {
+    client.request({
+        path: '/channels/staffpicks/videos',
+        query: {
+            page: _page,
+            per_page: 10,
+            fields: 'uri,name,description,duration,created_time,player_embed_url,pictures,categories,user,stats,embed, is_playable'
+        }
+    }, function (error, body, status_code, headers) {
+        if (error) {
+       
+        } else {
+            data = body.data;
+            fs.writeFile('./video.json', data, (err) => {
+                if (err) throw err;
+            })
+        }
+
+    });
+}
+ requestVideo();
+*/
+/*
+const CLIENT_ID = "09cd3689e8271df1e6fb49865431b0eb439acafe"
+const CLIENT_SECRET = "/kebe/rbIr77u/v1ExH5FCRfOslvD/zNdjVe8m5YoTGqZ64nmX62clEZWX/QGoGnoT6HdrgA75BwjRpgHuSx4cyYNGj3xyk/RTxnVLmAt4MjS9f8axhZ2/oDcblZbUGN"
+const ACCESS_TOKEN = "5be2d01f5910432bf96c594e8f7f2057"
+let ACCES_VIDEO = "https://api.vimeo.com";
+
+const oracledb = require('oracledb');
+const fs = require('fs')
+/*
+var Vimeo = require('vimeo').Vimeo;
+var client = new Vimeo(CLIENT_ID, CLIENT_SECRET, ACCESS_TOKEN);
+let data;
+let categoryList = [], category_id = 0, id = 0;
+function requestVideo() {
+  client.request({
+      path: '/channels/staffpicks/videos',
+      query: {
+          page: 1,
+          per_page: 50,
+          fields: 'uri,name,description,duration,created_time,player_embed_url,pictures,categories,user,stats,embed, is_playable'
+      }
+  }, function (error, body, status_code, headers) {
+      if (error) {
+
+      } else {
+          data = body.data;
+          fs.writeFile('./video.json', data, (err) => {
+              if (err) throw err;
+          })
+      }
+
+  });
+}
+requestVideo();*/
+/*
+let categoryList = [];
+const jsonVideo = require("./video.json")
+async function populateDB() {
+    let connection;
+
+    try {
+        var i = 2;
+        connection = await oracledb.getConnection({ user: "student", password: "student", connectionString: "//localhost:1521/xe" });
+        jsonVideo.data.forEach(element => {
+            const { uri, name, description, created_time, embed: { html }, stats, categories, is_playable, user, duration, pictures } = element;
+            const categoryName = categories[0]?.name ?? "Narative"
+            const userName = user.name;
+            const picture = pictures.base_link;
+            //console.log(picture)
+            var newHtml = 'hgvty'
+            const des = typeof description === "string" ? description.split(/\r?\n/)[0] : "nice video"
+            var statsVideo = Math.floor(Math.random() * 10000) + 1000;
+            var countRating = Math.floor(Math.random() * 10);
+            var rating = Math.floor(Math.random() * 5) + 1;
+            i++;
+
+
+            ///INSERT CATEGORY
+            /*
+            if(!categoryList.includes(categoryName)){
+              categoryList.push(categoryName)
+              var sql = "INSERT INTO category (id, category) VALUES ('" + i + "', '" + categoryName + "')";
+                      connection.execute(sql);
+                      connection.commit();
+            }*/
+
+//Insert videos
+/*
+var insertVideo1 = `INSERT INTO video VALUES(${i}, '${uri}', :1, :2, :3,:4 , :5, :6, :7, :8, :9 , :10, :11, :12)`;
+connection.execute(insertVideo1, [name, des, categoryName, duration, created_time, userName, statsVideo, html, 1, countRating, rating, picture]);
+
+connection.commit();
+        })
+
+    }
+    catch (err) {
+    console.error(err);
+} finally {
+    if (connection) {
+        try {
+            await connection.close();
+        } catch (err) {
+            console.error(err);
+        }
+    }
+}
+}
+
+populateDB();
+*/
+
+module.exports = {
+    verfLogin,
+    registerUser,
+    getIdUser,
+    getUsernameDB,
+    getUsernameAndEmailDB,
+    getCategoryDB,
+    getVideoAllDB,
+    getVideoIdDB,
+    getVideoByCategoryDB,
+    existLike,
+    deleteLike,
+    insertReview,
+    insertLike,
+    insertFeedBack,
+    getReviewVideoDB,
+    getReviewUserDB,
+    getLikeUserDB,
+    getTopDB,
+    updateVideoDB
+}
+

@@ -1,0 +1,53 @@
+const dataBase = require('../models/DBModule')
+
+async function getVideoId(name) {
+
+    return new Promise((resolve, reject) => {
+
+        var resultFunc1 = dataBase.getVideoIdDB(name);
+        resolve(resultFunc1)
+    })
+}
+
+async function getVideoAll(id) {
+
+    return new Promise((resolve, reject) => {
+
+        var resultFunc1 = dataBase.getVideoAllDB(id);
+        resolve(resultFunc1)
+    })
+}
+
+
+async function getVideoByCategory(name) {
+
+    return new Promise((resolve, reject) => {
+
+        var resultFunc1 = dataBase.getVideoByCategoryDB(name);
+        resolve(resultFunc1)
+    })
+}
+
+async function getTop() {
+
+    return new Promise((resolve, reject) => {
+
+        var resultFunc1 = dataBase.getTopDB();
+        resolve(resultFunc1)
+    })
+}
+
+
+async function updateVideo(idVideo, rating) {
+
+    return dataBase.updateVideoDB(idVideo, rating);
+}
+
+
+module.exports = {
+    getVideoAll,
+    getVideoId,
+    getVideoByCategory,
+    getTop,
+    updateVideo
+}

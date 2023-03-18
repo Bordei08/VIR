@@ -1,0 +1,118 @@
+const user = require('../models/userModel')
+const { getPostData } = require('../utils.js')
+
+async function getResultLogin(req, res) {
+
+    var body = await getPostData(req)
+
+    body = JSON.parse(body);
+
+
+    try {
+        const userResult = await user.findByUsernameAndPassword(body.username, body.password);
+
+        if (userResult == 'true') {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+
+        }
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+
+        res.end(JSON.stringify(userResult))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getResultRegister(req, res) {
+
+    var body = await getPostData(req)
+
+    body = JSON.parse(body);
+
+
+    try {
+        const userResult = await user.create(body.username, body.email, body.password)
+
+        if (userResult == 'true')
+            res.writeHead(201, { 'Content-Type': 'application/json' })
+        else
+            res.writeHead(400, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(userResult))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+async function getIdUserBy(req, res, username) {
+    var userResult = 'false';
+    var idUser = await user.getId(username);
+    var obj = new Object();
+    obj.id = idUser;
+    var jsonString = JSON.stringify(obj);
+    if (idUser)
+        userResult = 'true';
+
+    try {
+        if (userResult == 'false') {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: 'Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(jsonString)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getUsernameBy(req, res, id) {
+    var userResult = 'false';
+    var usernameUser = await user.getUsernameU(id);
+
+    var obj = new Object();
+    obj.username = usernameUser;
+    var jsonString = JSON.stringify(obj);
+    if (usernameUser)
+        userResult = 'true';
+
+    try {
+        if (userResult == 'false') {
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: ' Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(jsonString)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+async function getUsernameAndEmailBy(req, res, id) {
+    var userResult = await user.getUsernameEmail(id);
+    var jsonString = JSON.stringify(userResult);
+    try {
+        if (userResult == 'false') {
+            res.writeHead(404, { 'Content-Type': 'application/json' })
+            res.end(JSON.stringify({ message: ' Not Found' }))
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+            res.end(jsonString)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {
+    getResultLogin,
+    getResultRegister,
+    getIdUserBy,
+    getUsernameBy,
+    getUsernameAndEmailBy
+}

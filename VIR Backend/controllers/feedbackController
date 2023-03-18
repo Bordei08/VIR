@@ -1,0 +1,24 @@
+const feedback = require('../models/feedbackModel')
+const { getPostData } = require('../utils.js')
+
+
+async function getResultCreateFeedback(req, res) {
+    var body = await getPostData(req)
+    body = JSON.parse(body);
+
+    try {
+        const feedbackResult = await feedback.createFeedBack(body.email, body.meg);
+        if (feedbackResult == 'true')
+            res.writeHead(201, { 'Content-Type': 'application/json' })
+        else
+            res.writeHead(500, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(feedbackResult))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {
+    getResultCreateFeedback
+}
