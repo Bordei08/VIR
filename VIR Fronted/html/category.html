@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../style/category.css">
+    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liked videos</title>
+</head>
+
+<body>
+    <div class="nav" id="myTopnav">
+        <div class="pages">
+            <a href="./home.html" class="btn__home">Logout</a>
+            <div class="dropdown">
+                <button class="dropbtn">See more<i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="./after_login.html" class="activePage">Home</a>
+                    <a href="./my_profile.html">My profile</a>
+                    <a href="./about_help2.html">About & Help</a>
+
+                </div>
+            </div>
+
+            <div class="no-dropdown pages">
+                <a href="./after_login.html" class="activePage">Home</a>
+                <a href="./my_profile.html">My profile</a>
+                <a href="./about_help2.html">About & Help</a>
+            </div>
+        </div>
+
+        <p class="title">VideoTube</p>
+    </div>
+    <main>
+        <div>
+            <h2 class="category-title">Category selected: </h2>
+            <div class="category-cards"></div>
+        </div>
+    </main>
+    <script src="../scripts/category.js"></script>
+</body>
+
+</html>

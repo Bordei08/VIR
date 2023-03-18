@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="../style/video_page.css" />
+  <link rel="stylesheet" type="text/css" href="../style/navbar.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <div class="nav" id="myTopnav">
+      <div class="pages">
+        <a href="./home.html" class="btn__home">Logout</a>
+        <div class="dropdown">
+          <button class="dropbtn">See more<i class="fa fa-caret-down"></i>
+          </button>
+
+          <div class="dropdown-content">
+            <a href="./after_login.html" class="activePage">Home</a>
+            <a href="./my_profile.html">My profile</a>
+            <a href="./about_help2.html">About & Help</a>
+
+          </div>
+        </div>
+
+        <div class="no-dropdown pages">
+          <a href="./after_login.html" class="activePage">Home</a>
+          <a href="./my_profile.html">My profile</a>
+          <a href="./about_help2.html">About & Help</a>
+        </div>
+      </div>
+
+      <p class="title">VideoTube</p>
+    </div>
+    <main>
+      <div class="movie">
+        <h2 class="movie__title"></h2>
+        <div class = "iframe_video">
+          
+        </div>
+      </div>
+      <div class="movie__description">
+        <h4 class="movie__details"><b>Details</b></h4>
+        <p class = "author" >
+          <b>Posted by: </b>
+        </p>
+        <p class = "posted">
+          <b>Posted on: </b>
+        </p>
+        <p class = "category">
+          <b>Category: </b>
+        </p>
+        <p class = "views">
+          <b>Views: </b>
+        </p>
+        <p class = "duration">
+          <b>Duration: </b>
+        </p>
+      </div>
+      <div class="rating__users">
+        <span class="heading"> <b>User Rating</b></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <p class = "average-based-on"></p>
+        <hr style="border:3px solid #f1f1f1">
+  
+        <div class="row">
+          <div class="side">
+            <div>5 star</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-1"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>5</div>
+          </div>
+          <div class="side">
+            <div>4 star</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-4"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>63</div>
+          </div>
+          <div class="side">
+            <div>3 star</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-3"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>15</div>
+          </div>
+          <div class="side">
+            <div>2 star</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-2"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>6</div>
+          </div>
+          <div class="side">
+            <div>1 star</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-1"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>20</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-section">
+        <h3 class = "comment-section-title">Comment Section</h3>
+        
+      </div>
+  
+      <div class="add__comment">
+        <div class="card">
+          <div class="row">
+            <div class="col-5">
+              <img alt="avatar__user" src="../resources/user1.png" width="70" class="rounded-circle mt-2" />
+              <p class="comment"><b>Add a comment</b></p>
+            </div>
+            <div class="col-10">
+              <div class="comment-box ml-2">
+  
+                <div class="rating">
+                  <input type="radio" name="rating" value="5" id="5" /><label for="5">☆</label>
+                  <input type="radio" name="rating" value="4" id="4" /><label for="4">☆</label>
+                  <input type="radio" name="rating" value="3" id="3" /><label for="3">☆</label>
+                  <input type="radio" name="rating" value="2" id="2" /><label for="2">☆</label>
+                  <input type="radio" name="rating" value="1" id="1" /><label for="1">☆</label>
+                </div>
+                <div class="comment-area">
+                  <textarea class="form-control take-msg" placeholder="what is your view?" rows="4"></textarea>
+                </div>
+                <div class="comment-btns mt-2">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="pull-right">
+                        <button class="btn btn-success send btn-sm post_review">
+                          Send <i class="fa fa-long-arrow-right ml-1"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+  </div>
+  <script src="../scripts/video.js"></script>
+</body>
+
+</html>

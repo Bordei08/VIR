@@ -1,0 +1,118 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #3eeb92;
+    background-image: linear-gradient(90deg, #74ebbc 0%, #9fc7e6 100%);
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+} 
+  
+  .image-card img {
+    display: block;
+    width: 250px;
+    height: 170px;
+    object-fit: cover;
+  }
+  
+  .image-card {
+    width: 30%;
+  }
+  
+  .card-text h3 {
+    font-size: 16px;
+  }
+  
+.object_article {
+    -webkit-box-shadow: 2px 3px 16px -1px #000000; 
+    box-shadow: 2px 3px 16px -1px #000000;
+    border-radius: 15px;
+    background-color: white;
+    margin: 1vh 0;
+    padding: 1rem;
+}
+
+.object_picture {
+  margin-top: 1vh;
+  width: 23vw;
+  height: 20vh;
+}
+
+  .all-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .liked-cards {
+    margin: 0 5vw 2vh;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+  }
+
+  main{
+    margin-bottom: 2vh;
+  }
+
+  .liked-title{
+    margin: 1vh 5vw;
+  }
+  
+  .liked_btn {
+    float: right;
+  }
+
+  #favorites-btn {
+    font-size: 16px!important;
+    margin-left: 18%;
+    width: 60%;
+    padding: 7px;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    outline: none;
+}
+
+#favorites-btn:hover{
+    background-color: white;
+    color:red;
+    border: 2px solid black;
+}
+
+.video-link {
+  text-decoration: none;
+  color:black;
+}
+
+@media only screen and (max-width:1224px) {
+  .object_picture {
+    width: 23vw;
+  }
+}
+
+@media only screen and (max-width:1024px) {
+  .object_article {
+    width: 40%;
+  }
+
+  .object_picture {
+    width: 34vw;
+  }
+}
+
+
+@media only screen and (max-width:600px) {
+  .object_article {
+    width: 80%;
+  }
+
+  .object_picture {
+    width: 66vw;
+  }
+}

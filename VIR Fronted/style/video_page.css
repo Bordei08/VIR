@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  margin: 0 auto; /* Center website */
+  background-color: #3eeb92;
+  background-image: linear-gradient(90deg, #74ebbc 0%, #9fc7e6 100%);
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  margin: 0;
+}
+
+.movie {
+  margin-left: 5vw;
+  display: block;
+  height: 80vh;
+}
+
+.movie__image {
+  margin: 0 auto 4vh;
+  width: 60%;
+  height: 90%;
+  float: left;
+}
+
+.movie__details {
+  margin: 0.5vh 20vw;
+  float: right;
+  font-size: large;
+}
+
+.movie__description {
+  padding: 20px;
+  width: 60vw;
+  height: 30vh;
+  background-color: #00000033;
+  margin: 2vh 0 2vh 19vw;
+  display: block;
+}
+
+.movie__title {
+  margin: 2vh 0 3vh 42vw;
+  font-size: larger;
+}
+
+.rating__users {
+  display: block;
+  position: relative;
+  background-color: #00000033;
+  margin: auto 19vw;
+  padding: 2vh 1vw;
+  width: 60vw;
+}
+
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 10px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
+.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
+.bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
+.bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
+.bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+
+iframe {
+  width: 90vw;
+  height: 70vh;
+  margin-left: 0;
+}
+
+main{
+  display: block;
+}
+
+.comment-section{
+  padding: 20px;
+  width: 60vw;
+  height: auto;
+  background-color: #00000033;
+  margin-top: 2vh;
+  margin-left: 19vw;
+}
+
+.comment-section-title{
+  margin-top: 0;
+  margin-left: 5vw;
+}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+    display: none;
+  }
+}
+
+.add__comment{
+  display: grid;
+  place-items: center;
+  background-color: #00000033;
+  margin: 2vh 19vw;
+  padding: 2vh 1vw;
+  width: 60vw;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 20px;
+  width: 450px;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border-radius: 6px;
+  -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1)
+  }
+  .comment-box {
+  padding: 5px
+  }
+  .comment-area textarea {
+  resize: none;
+  border: 1px solid #ad9f9f
+  }
+  .form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ffffff;
+  outline: 0;
+  box-shadow: 0 0 0 1px rgb(255, 0, 0) !important
+  }
+  .send {
+  color: #fff;
+  background-color: #ff0000;
+  border-color: #ff0000
+  }
+  .send:hover {
+  color: #fff;
+  background-color: #f50202;
+  border-color: #f50202
+  }
+  .rating {
+  display: flex;
+  margin-top: -10px;
+  flex-direction: row-reverse;
+  margin-left: -4px;
+  float: left
+  }
+  .rating>input {
+  display: none
+  }
+  .rating>label {
+  position: relative;
+  width: 19px;
+  font-size: 25px;
+  color: #ff0000;
+  cursor: pointer
+  }
+  .rating>label::before {
+  content: "\2605";
+  position: absolute;
+  opacity: 0
+  }
+  .rating>label:hover:before,
+  .rating>label:hover~label:before {
+  opacity: 1 !important
+  }
+  .rating>input:checked~label:before {
+  opacity: 1
+  }
+  .rating:hover>input:checked~label:before {
+  opacity: 0.4
+  }
+
+.comment {
+  width: 10vw;
+}
+
+@media screen and (max-width: 672px) {
+
+  .movie__description {
+    height: auto;
+    display: block;
+    margin: 3vh 4.5vw 2vh;
+    padding: 0;
+  }
+
+  .movie__description p{
+    margin-top: 5vh;
+  }
+
+  .movie__image {
+    width: 90%;
+    margin:1vh 4.5vw;
+    height: 60%;
+  }
+
+  .movie__title {
+    margin-left: 40vw;
+  }
+
+  .rating__users, .add__comment, .movie__description, .comment-section {
+    padding: 20px;
+    width: 90vw;
+    margin-left: 4vw;
+  }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../style/my_profile.css">
+    <link rel="stylesheet" href="../style/navbar.css">
+    <script defer src="../scripts/my_profile.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="nav" id="myTopnav">
+        <div class="pages">
+            <a href="./home.html" class="btn__home">Logout</a>
+            <div class="dropdown">
+                <button class="dropbtn">See more<i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="./after_login.html">Home</a>
+                    <a href="./my_profile.html" class="activePage">My profile</a>
+                    <a href="./about_help2.html">About & Help</a>
+                </div>
+            </div>
+
+            <div class="no-dropdown pages">
+                <a href="./after_login.html">Home</a>
+                <a href="./my_profile.html" class="activePage">My profile</a>
+                <a href="./about_help2.html">About & Help</a>
+            </div>
+        </div>
+
+        <p class="title">VideoTube</p>
+    </div>
+
+    <div class="profile_user">
+        <div class="container-fluid mt--7">
+            <div class="row">
+              <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                <div class="card card-profile shadow">
+                  <div class="row justify-content-center profile_img">
+                    <div class="col-lg-3 order-lg-2">
+                      <div class="card-profile-image">
+                        <a href="#">
+                          <img src="../resources/user1.png" class="rounded-circle">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    <div class="d-flex justify-content-between">
+                     
+                    </div>
+                  </div>
+                  <div class="card-body pt-0 pt-md-4">
+                    <div class="row">
+                      <div class="col">
+                        <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                          <div>
+                            <span class="heading">89</span>
+                            <span class="description">Likes</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <div class="infoUserName">
+                       <span class="font-weight-light"></span>
+                      </div>
+                      <hr class="my-4">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                  <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                      <div class="col-8">
+                        <h3 class="mb-0">My account</h3>
+                      </div>
+                      <div class="col-4 text-right">
+                        <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <h6 class="heading-small text-muted mb-4">User information</h6>
+                      <div class="pl-lg-4">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group focused">
+                              <label class="form-control-label" for="input-username">Username</label>
+                              <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" >
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label class="form-control-label" for="input-email">Email address</label>
+                              <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+
+                
+              </div>
+
+                <div class="card bg-secondary shadow review-list">
+                  <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                      <div class="col-8 reviews">
+                        <h3 class="mb-0">Added reviews</h3>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

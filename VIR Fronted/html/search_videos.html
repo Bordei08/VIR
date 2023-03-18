@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../style/search_videos.css">
+    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="../scripts/search_videos.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="nav" id="myTopnav">
+        <div class="pages">
+            <a href="./home.html" class="btn__home">Logout</a>
+            <div class="dropdown">
+                <button class="dropbtn">See more<i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="./after_login.html" class="activePage">Home</a>
+                    <a href="./my_profile.html">My profile</a>
+                    <a href="./about_help2.html">About & Help</a>
+
+                </div>
+            </div>
+
+            <div class="no-dropdown pages">
+                <a href="./after_login.html" class="activePage">Home</a>
+                <a href="./my_profile.html">My profile</a>
+                <a href="./about_help2.html">About & Help</a>
+            </div>
+        </div>
+
+        <p class="title">VideoTube</p>
+    </div>
+
+
+    <div class="category">
+
+    </div>
+    
+    <main id="main-holder">
+        <div id="search-error-msg-holder">
+            <p id="search-error-msg">Invalid video <span id="error-msg-second-line">Try again</span></p>
+        </div>
+    
+        <div>
+            <h2 class = "search_video">Search for a video:</h2>
+            <form action="" class="search-bar searchBar" id="search-form">
+                <input type="search" name="search" pattern=".*\S.*" placeholder="Search.." required >
+                <button class="search-btn buttonSearch" type="submit" id="search-form-submit">
+                    <span>Search</span>
+                </button>
+            </form>
+        </div>
+        
+        <div>
+            <h2 class = "filter_video">Filter after category:</h2>
+            <div class="categories" id="categoriesId">
+            </div>
+            <button type="button" class = "filter-category">Filter!</button>
+        </div>
+    </main>
+</body>
+
+</html>

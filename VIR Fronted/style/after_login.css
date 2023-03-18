@@ -1,0 +1,97 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #3eeb92;
+    background-image: linear-gradient(90deg, #74ebbc 0%, #9fc7e6 100%);
+    width: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
+/*Mesajul de bun venit */
+.welcome {
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+    cursor: default;
+
+}
+
+.welcome>h1 {
+    color: rgba(30, 2, 2, 0.64);
+    font-size: 30px;
+    font-family: 'georgia';
+    font-weight: bold;
+    text-align: center;
+}
+
+@media only screen and (max-width:600px) {
+    .welcome>h1 {
+        font-size: 25px;
+    }
+}
+
+/*Cele 3 imagini*/
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+
+.img {
+    justify-content: center;
+    background-image: url("/favicon-32x32.png");
+    height: 160px;
+    margin: 50px;
+    border-radius: 16px;
+}
+
+.block>p {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.only_img:hover {
+    transform: scale(1.2);
+}
+
+
+@media only screen and (max-width:1090px) {
+    .actions {
+        display: flow-root;
+
+    }
+
+    .only_img {
+        display: flex;
+        justify-content: center;
+    }
+
+    .img {
+        background-image: url("/favicon-32x32.png");
+        height: 160px;
+        margin: 40px;
+        border-radius: 16px;
+    }
+
+    .block>p {
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+
+    .only_img:hover {
+        display: flex;
+        justify-content: center;
+        transform: scale(1.1);
+    }
+}
+

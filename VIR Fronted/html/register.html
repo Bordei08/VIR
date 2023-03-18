@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../style/register.css">
+    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="../scripts/register.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="nav" id="myTopnav">
+        <div class="pages">
+            <a href="./home.html" class="btn__home">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Dropdown<i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content">
+                    <a href="./login.html">Login </a>
+                    <a href="./register.html" class="activePage">Register </a>
+                    <a href="./about_help1.html">About & Help</a>
+                </div>
+            </div>
+
+            <div class="no-dropdown pages">
+                <button class="dropbtn">Dropdown<i class="fa fa-caret-down"></i>
+                </button>
+                <a href="./login.html">Login </a>
+                <a href="./register.html" class="activePage">Register </a>
+                <a href="./about_help1.html">About & Help</a>
+            </div>
+        </div>
+
+        <p class="title">VideoTube</p>
+    </div>
+    <main id="main-holder">
+
+        <h1 id="register-header">Register</h1>
+
+        <div id="register-error-msg-holder">
+            <p id="register-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+        </div>
+
+        <form id="register-form">
+            <input type="text" name="username" id="username-field" class="register-form-field" placeholder="Username">
+            <input type="text" name="email" id="email-field" class="register-form-field" placeholder="Email">
+            <input type="password" name="password" id="password-field" class="register-form-field"
+                placeholder="Password">
+            <input type="submit" value="Register" id="register-form-submit">
+        </form>
+
+    </main>
+</body>
+
+</html>
